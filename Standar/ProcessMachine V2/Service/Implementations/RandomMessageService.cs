@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Standar.ProcessMachine_V2;
 using Standar.ProcessMachine_V2.Process.Finder.Implementations.EntityFramework;
+using Standar.ProcessMachine_V2.Process.Manipulator;
+using Standar.ProcessMachine_V2.Process.Manipulator.Implementation;
 using Standar.ProcessMachine_V2.Process.Message;
 using Standar.ProcessMachine_V2.Process.Message.Implementations.Configuration;
 using Standar.ProcessMachine_V2.ProcessMachine;
@@ -8,27 +10,29 @@ using Standar.ProcessMachine_V2.ProcessMachine.Process;
 
 namespace Standar.ProcessMachine_V2.Service.Implementations
 {
-    public class RandomMessageService : ServiceConfiguration<RandomMessageServiceConfig, RandomMessage_Result>
+    public class RandomMessageService : ServiceConfiguration<RandomMessageServiceConfig, Standar.Response>
     {
 
-        public override async Task<RandomMessage_Result> ExecuteAsync()
+        public override async Task<Standar.Response> ExecuteAsync()
         {
             IProcessMachine processMachine = new Standar.ProcessMachine_V2.ProcessMachine.ProcessMachine();
             RandomMessage_Result ctx = new RandomMessage_Result();
             List<Standar.Message> messages = new List<Standar.Message>();   
             Standar.Response response = new Standar.Response();
-            DbMensajesContext dbCtx = new DbMensajesContext();
+          
+            DbMensajesContext dbCtxw = new DbMensajesContext();
 
             await processMachine.FindProcess<Standar.Message, Standar.Message>((builder) =>
             {
-                builder.configurable = 
-                (config) => config.AddContext(dbCtx).AddQuery((query) => query.AsQueryable());
+                builder.configurable = Configuration.query;
+            
 
                 builder.ExecutionCondition = () => true;
 
                 builder.OnProcess = (result) =>
                 {
                     messages =  result.Result;
+                    Console.WriteLine("Inicio del Proceso");
                 };
                 return builder;
             });
@@ -45,17 +49,27 @@ namespace Standar.ProcessMachine_V2.Service.Implementations
 
                     response.Value = result.Message.Value;
                     response.Date = DateTime.Now;
-                    ctx.Message = response.Value;
                 };
                 return process;
             });
 
-            return ctx;
+           await processMachine.ManipulateProcess<Response>((builder) =>
+            {
+                builder.ExecutionCondition = () => !string.IsNullOrEmpty(response.Value);
+                builder.configurable = (config) => config.AddContext(dbCtxw).AddObjectToEdit(response).AddAction(ActionTypes.Add);
+                builder.OnProcess = (result) =>
+                {
+                    Console.WriteLine("Fin Del Proceso");
+                };
+                return builder;
+            });
+
+            return response;
         }
 
     }
 }
 public class RandomMessageServiceConfig
 {
-    public Func<IConfigurable<RandomMessageConfig>, IConfigurable<RandomMessageConfig>> messages { get; set; }
+    public Func<IConfigurable<EntityFrameworkFinderConfig<Standar.Message,Standar.Message>>, IConfigurable<EntityFrameworkFinderConfig<Standar.Message, Standar.Message>>> query { get; set; }
 }
