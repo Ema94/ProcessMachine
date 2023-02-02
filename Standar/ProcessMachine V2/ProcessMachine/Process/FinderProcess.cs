@@ -19,17 +19,7 @@ namespace Standar.ProcessMachine_V2.ProcessMachine.Process
             where Tin : class
             where TObject : class
         {
-            ProcessExecutionConfig<FindManyResult<TObject>> processInfo = new();
-            ProcessBuildConfigConfigurator<EntityFrameworkFinderConfig<Tin, TObject>, FindManyResult<TObject>> processBuildConfig = new();
-            IConfigurable<EntityFrameworkFinderConfig<Tin, TObject>> configureBuilder = new Configurable<EntityFrameworkFinderConfig<Tin, TObject>>();
-            IConfigurableProcess<EntityFrameworkFinderConfig<Tin, TObject>, FindManyResult<TObject>> Process = new EntityFrameworkFinderMany<Tin, TObject>();
-            processBuildConfig = config(processBuildConfig);
-            configureBuilder = processBuildConfig.configurable(configureBuilder);
-            Process.Configure(configureBuilder);
-            processInfo.Process = Process;
-            processInfo.Condition = processBuildConfig.ExecutionCondition;
-            processInfo.OnProcess = processBuildConfig.OnProcess;
-            await processMachine.ExecuteProcessAsync(processInfo);
+            await processMachine.ExecuteConfigurableAsync<EntityFrameworkFinderConfig<Tin,TObject>, FindManyResult<TObject>, EntityFrameworkFinderMany<Tin,TObject>>(config);
             return processMachine;
         }
     }

@@ -16,7 +16,6 @@ namespace Standar.ProcessMachine_V2.Service.Implementations
         public override async Task<Standar.Response> ExecuteAsync()
         {
             IProcessMachine processMachine = new Standar.ProcessMachine_V2.ProcessMachine.ProcessMachine();
-            RandomMessage_Result ctx = new RandomMessage_Result();
             List<Standar.Message> messages = new List<Standar.Message>();   
             Standar.Response response = new Standar.Response();
           
