@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\JEA.Components.Console.Log\JEA.Components.Console.Log.csproj" />
+    <ProjectReference Include="..\JEA.Components.Core\JEA.Components.Core.csproj" />
+    <ProjectReference Include="..\JEA.Components.Mailer.SMTP\JEA.Components.Mailer.SMTP.csproj" />
+    <ProjectReference Include="..\JEA.Components.Readers.EF\JEA.Components.Readers.EF.csproj" />
+    <ProjectReference Include="..\JEA.Components.Validators.Fluent\JEA.Components.Validators.Fluent.csproj" />
+    <ProjectReference Include="..\JEA.Components.Writers.EF\JEA.Components.Writers.EF.csproj" />
+  </ItemGroup>
+
+</Project>
