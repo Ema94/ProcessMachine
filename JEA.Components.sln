@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JEA.Components", "JEA.Components\JEA.Components.csproj", "{A89EEAC9-2FA9-4AE1-AFAF-58E52FDAF0F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.App", "1.App", "{88CB81BE-21E0-4A59-AF56-89691F89E03D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.ProcessMachine", "2.ProcessMachine", "{E69EF18A-15A6-402F-9FC2-A2D91BF777F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A89EEAC9-2FA9-4AE1-AFAF-58E52FDAF0F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A89EEAC9-2FA9-4AE1-AFAF-58E52FDAF0F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A89EEAC9-2FA9-4AE1-AFAF-58E52FDAF0F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A89EEAC9-2FA9-4AE1-AFAF-58E52FDAF0F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A89EEAC9-2FA9-4AE1-AFAF-58E52FDAF0F4} = {88CB81BE-21E0-4A59-AF56-89691F89E03D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7DEF4B92-5508-4462-A080-C4DA4F9C860D}
+	EndGlobalSection
+EndGlobal
